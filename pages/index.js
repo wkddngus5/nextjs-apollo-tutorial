@@ -1,21 +1,20 @@
 import Head from 'next/head';
-import useSWR from 'swr';
-
-const fetcher = async ( query ) => {
-    const response = await fetch('http://localhost:3000/api/graphql', {
-        method: 'POST',
-        headers: {
-            'Content-type': 'applocation/json',
-        },
-        body: JSON.stringify({ query }),
-    });
-    return await response.json();
-};
 
 export default function Home() {
-    const { data = { services: [] } } = useSWR( '{ users { name } }', fetcher);
+    (
+        async () => {
+            const response = await fetch('http://localhost:3000/api/graphql', {
+                method: 'POST',
+                headers: {
+                    'Content-type': 'applocation/json',
+                },
+                body: JSON.stringify({ query: '{ users { name } }' }),
+            });
+            const json = await response.json();
+            console.log( json );
+        }
+    )();
 
-    console.log( data );
     return (
         <div className="container">
             <Head>
