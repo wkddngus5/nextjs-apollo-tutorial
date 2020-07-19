@@ -1,19 +1,26 @@
 import { ApolloServer, gql } from 'apollo-server-micro';
+import data from './data.json';
 
 const typeDefs = gql`
     type Query {
         users: [User!]!
+        user(id:String!): User!
     }
     type User {
+        id: String
         name: String
+        color: String
     }
 `;
 
 const resolvers = {
     Query: {
-        users(parent, args, context) {
-            return [{ name: 'Nextjs' }];
+        users( _parent, _args, _context ) {
+            return data.users;
         },
+        user( parent, args, context ) {
+            return data.users.find( user => user.id === parseInt( args.id ) );
+        }
     },
 };
 

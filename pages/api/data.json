@@ -1,0 +1,34 @@
+{
+    "users": [
+        {
+            "id": 1,
+            "name": "Jack",
+            "color": "red"
+        }, {
+            "id": 2,
+            "name": "Harry",
+            "color": "blue"
+        }, {
+            "id": 3,
+            "name": "Jacob",
+            "color": "green"
+        }, {
+            "id": 4,
+            "name": "Charlie",
+            "color": "red"
+        }, {
+            "id": 5,
+            "name": "Robert",
+            "color": "red"
+        }, {
+            "id": 6,
+            "name": "Michael",
+            "color": "blue"
+        }, {
+            "id": 7,
+            "name": "William",
+            "color": "blue"
+        }
+    ]
+
+}
