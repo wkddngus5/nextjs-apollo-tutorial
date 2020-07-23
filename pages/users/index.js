@@ -1,21 +1,20 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { useApollo } from '../../lib/apolloClient';
+import { USERS_LIST } from '../../gql/user';
 
 export default function Users() {
+    const apolloClient = useApollo();
     const [ users, setUsers ] = useState([]);
 
     useEffect( () => {
         (
             async () => {
-                const response = await fetch('http://localhost:3000/api/graphql', {
-                    method: 'POST',
-                    headers: {
-                        'Content-type': 'applocation/json',
-                    },
-                    body: JSON.stringify({ query: '{ users { id name color } }' }),
-                });
-                const { data } = await response.json();
-                console.log( data );
+                const { loading, error, data } = await apolloClient.query({ query: USERS_LIST, });
+
+                console.log('loading:', loading);
+                console.log('error:', error);
+                console.log('data:', data);
                 setUsers( data.users );
             }
         )();

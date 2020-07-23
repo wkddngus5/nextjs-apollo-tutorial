@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router';
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 import { useState } from 'react';
-
-const client = new ApolloClient({
-    uri: 'http://localhost:3000/api/graphql',
-    cache: new InMemoryCache(),
-});
+import { useApollo } from '../../lib/apolloClient';
+import { USER_DETAIL } from '../../gql/user';
 
 function UserDetail() {
+    const apolloClient = useApollo();
+
     const router = useRouter();
     const [ user, setUser ] = useState();
 
@@ -16,16 +14,8 @@ function UserDetail() {
         if ( !userId ) {
             return;
         }
-        const { loading, error, data } = await client.query({
-            query: gql`
-                query user($userId: String!) {
-                    user(id: $userId) {
-                        id
-                        name
-                        color
-                    }
-                }
-            `,
+        const { loading, error, data } = await apolloClient.query({
+            query: USER_DETAIL,
             variables: { userId },
         });
         console.log('loading:', loading);
