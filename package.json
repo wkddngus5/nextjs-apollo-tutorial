@@ -8,8 +8,9 @@
     "start": "next start"
   },
   "dependencies": {
-    "@apollo/client": "^3.0.2",
+    "@apollo/client": "^3.1.1",
     "@apollo/react-hooks": "^3.1.5",
+    "@material-ui/core": "^4.11.0",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
@@ -19,6 +20,8 @@
     "next": "9.4.4",
     "react": "16.13.1",
     "react-dom": "16.13.1",
+    "serverless-mysql": "^1.5.4",
+    "sql-template-strings": "^2.2.2",
     "swr": "^0.2.3"
   }
 }

@@ -1,9 +1,40 @@
 import Head from 'next/head';
 import Link from 'next/link';
+import Button from '@material-ui/core/Button';
+import SigninModal from '../components/SigninModal';
+import { useState, useCallback } from 'react';
+
+const ROW_STYLE = {
+    display: 'flex',
+    justifyContent: 'space-around',
+    margin: '20px 10px',
+    width: '220px',
+};
+
+const BUTTON_STYLE = {
+    textTransform: 'none',
+};
 
 export default function Home() {
+    const [visibleModalName, setVisibleModalName] = useState(false);
+
+    const showModal = useCallback( ( event ) => {
+        const newVisibleModalname = event.target.closest('button').dataset.name;
+        if ( !newVisibleModalname ) {
+            return;
+        }
+        setVisibleModalName(newVisibleModalname);
+    }, []);
+
+    const closeModal = useCallback( () => {
+        setVisibleModalName();
+    }, []);
+
     return (
         <div className="container">
+            <SigninModal
+                isVisible={visibleModalName === 'signup'}
+                onCLose={closeModal} />
             <Head>
                 <title>Next App With Apollo</title>
                 <link rel="icon" href="/favicon.ico" />
@@ -13,6 +44,26 @@ export default function Home() {
                 <h1 className="title">
                     Next App With <span>Apollo</span>
                 </h1>
+
+                <div className="row" style={ROW_STYLE}>
+                    <Button
+                        disableRipple
+                        variant="contained"
+                        color="primary"
+                        data-name="signup"
+                        style={BUTTON_STYLE}
+                        onClick={showModal}>
+                        SignUp
+                    </Button>
+                    <Button
+                        variant="contained"
+                        color="default"
+                        data-name="signin"
+                        style={BUTTON_STYLE}
+                        onClick={showModal}>
+                        SignIn
+                    </Button>
+                </div>
 
                 <Link href="/users">
                     <p className="description">
