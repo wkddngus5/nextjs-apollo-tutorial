@@ -36,7 +36,8 @@ function SignIn() {
           email: emailElement.value,
           password: passwordElement.value,
         },
-      })
+      });
+      console.log(data);
       if (data.signIn.user) {
         await router.push('/')
       }
